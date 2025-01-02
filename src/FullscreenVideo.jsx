@@ -1,44 +1,39 @@
 // FullscreenVideo.jsx
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import './FullscreenVideo.css';
 
 const FullscreenVideo = () => {
+  const [hasStarted, setHasStarted] = useState(false);
   const videoRef = useRef(null);
   const audioRef = useRef(null);
 
-  useEffect(() => {
-    if (videoRef.current && audioRef.current) {
-      const playMedia = async () => {
-        try {
-          await videoRef.current.play();
-          await audioRef.current.play();
-        } catch (error) {
-          console.error('Error playing media:', error);
-        }
-      };
-      playMedia();
-    }
-  }, []);
-
-  const toggleAudio = () => {
-    if (audioRef.current.paused) {
-      audioRef.current.play();
-    } else {
-      audioRef.current.pause();
+  const startPlayback = async () => {
+    try {
+      await videoRef.current.play();
+      await audioRef.current.play();
+      setHasStarted(true);
+    } catch (error) {
+      console.error('Playback error:', error);
     }
   };
 
   return (
     <div className="video-container">
+      {!hasStarted && (
+        <div className="start-screen" onClick={startPlayback}>
+          <div className="start-button">
+            Click to Start
+          </div>
+        </div>
+      )}
+      
       <video
         ref={videoRef}
         className="fullscreen-video"
-        loop
-        muted
         playsInline
+        loop
       >
         <source src="background.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
       </video>
 
       <audio
@@ -46,12 +41,7 @@ const FullscreenVideo = () => {
         loop
       >
         <source src="music.wav" type="audio/wav" />
-        Your browser does not support the audio element.
       </audio>
-
-      <button className="audio-control" onClick={toggleAudio}>
-        {audioRef.current?.paused ? 'Play' : 'Pause'} Music
-      </button>
     </div>
   );
 };
