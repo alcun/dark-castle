@@ -22,7 +22,7 @@ const FullscreenVideo = () => {
       {!hasStarted && (
         <div className="start-screen" onClick={startPlayback}>
           <div className="start-button">
-            Click to Start
+            Enter the Dark Castle
           </div>
         </div>
       )}
