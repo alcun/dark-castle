@@ -45,6 +45,12 @@
   border-color: #000;
 }
 
+.start-button.rust {
+  background: #802e0a;
+  color: rgba(255, 255, 255, 0.8);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
 .scene-toggle {
   position: fixed;
   bottom: 20px;
