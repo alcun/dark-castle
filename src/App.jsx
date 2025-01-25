@@ -2,6 +2,8 @@ import { useState } from "react";
 import DarkCastleVideo from "./DarkCastleVideo";
 import ShadowFallsVideo from "./ShadowFallsVideo";
 import BlackwoodInfirmaryVideo from "./BlackwoodInfirmaryVideo";
+import { Analytics } from '@vercel/analytics/react';
+
 
 function App() {
   const [currentScene, setCurrentScene] = useState("dark");
@@ -48,6 +50,7 @@ function App() {
           Switch to {getSceneTitle(getNextScene(currentScene))}
         </button>
       </div>
+      <Analytics/>
     </div>
   );
 }
